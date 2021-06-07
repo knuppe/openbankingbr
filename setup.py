@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
 info = dict()
-with open('src/__version__.py', 'r') as f:
+with open('src/openbankingbr/__version__.py', 'r') as f:
     lines = f.readlines()
     for line in lines:
         if ' = ' in line:
@@ -28,9 +28,9 @@ setuptools.setup(
     license='MIT',
     packages=setuptools.find_packages(where="src"),    
     install_requires=[
-            "requests"
+        "requests"
     ],
-    keywords=['openbanking', 'bacen'],
+    keywords=['openbanking', 'bacen', 'banco-central-brasil'],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
