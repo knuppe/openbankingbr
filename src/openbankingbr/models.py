@@ -204,7 +204,12 @@ class Participante(DataObject):
                                     yield Produto(self, key, item, interestRate)
                         else:
                             yield Produto(self, key, item)
-
+    @property
+    def status(self) -> str:
+        """
+        Retorna o status do registro do diretório da organização.
+        """
+        return get(self.dados, 'Status', valueType=str, required=True)
 
 class Agencia(DataObject):
     """
