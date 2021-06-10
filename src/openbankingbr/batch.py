@@ -1,6 +1,7 @@
 # %%
 
 import os
+import platform
 
 from . import OpenBankingBR
 
@@ -8,7 +9,7 @@ from .errors import BatchException
 from .models import Participante, Produto
 
 from typing import List
-from datetime import date
+from datetime import date, datetime
 
 class BatchOpenBanking():
     """
@@ -26,6 +27,7 @@ class BatchOpenBanking():
         # csvDelimiter = ';'
     )
     bob.todos_dados()
+    bob.limpa_cache_antigo() # remove arquivos de cache com mais de 5 dias de vida.
     ```
 
     """
@@ -72,6 +74,44 @@ class BatchOpenBanking():
         self.produtos_csv()
         self.servicos_csv()
         self.pacotes_csv()
+
+    def limpa_cache_antigo(self, idadeMaxima = 5):
+        """
+        Realiza a limpeza dos arquivos antigos (padrão é `5` ou mais dias de vida) de cache.
+
+        Note que um arquivo de cache só deve ser antigo caso um endpoint não esteja mais
+        disponível por uma financeira, e mesmo que o arquivo seja "antigo" ao tentar puxar
+        os dados mais recentes, o arquivo de cache será recriado com as informações mais recentes.
+        """
+    
+        if not os.path.exists(self.cacheDir):
+            return
+        
+        if not os.path.isdir(self.cacheDir):
+            return
+
+        ctime: datetime
+        files = os.listdir(self.cacheDir)
+        for file in files:
+            if not file.endswith('.json'):
+                continue
+           
+            fileName = os.path.join(self.cacheDir, file)
+
+            if platform.system() == "Windows":
+                ctime = datetime.fromtimestamp(os.path.getctime(fileName))
+            else:
+                stat = os.stat(fileName)
+                try:
+                    ctime = datetime.fromtimestamp(stat.st_birthtime)
+                except:
+                    ctime = datetime.fromtimestamp(stat.st_mtime)
+
+            if (date.today() - ctime.date()).days > idadeMaxima:
+                try:
+                    os.remove(fileName)
+                except:
+                    continue
 
     def agencias_csv(self):
         """
