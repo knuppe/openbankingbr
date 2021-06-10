@@ -73,4 +73,4 @@ batch.todos_dados()
 
 ## Qualidade dos dados
 
-Em teoria as APIs são homologadas pelo Bacen, porém na prática consultando as APIs é facilmente observado que **várias** instituições financeiras não seguem o padrão da documentação, não sei como passaram na homologação, mas o fato é que o dado problemático existe. Nesta biblioteca tentei contornar e validar o máximo dos dados, ignorando os valores que são asurdamente fora do [padrão](https://openbanking-brasil.github.io/areadesenvolvedor/) da documentação.
+Em teoria as APIs são homologadas pelo Bacen, porém na prática consultando as APIs é facilmente observado que **várias** instituições financeiras não seguem o padrão da documentação, não sei como passaram na homologação, mas o fato é que o dado problemático existe. Nesta biblioteca tentei contornar e validar o máximo dos dados, ignorando os valores que são absurdamente fora do [padrão](https://openbanking-brasil.github.io/areadesenvolvedor/) da documentação.
