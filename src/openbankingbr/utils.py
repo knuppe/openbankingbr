@@ -131,6 +131,9 @@ def fetchUrl(url: str, cacheDir: str = None) -> dict:
             'User-Agent': f'OpenBankingBR/{__version__}; (+https://github.com/knuppe/openbankingbr)'
         })
 
+        if not res.ok:
+           return None
+
         data = res.json()
 
         if data != None:
