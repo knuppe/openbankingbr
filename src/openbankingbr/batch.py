@@ -22,7 +22,7 @@ class BatchOpenBanking():
         dataDir  = './data',
         cacheDir = './cache',
 
-        # caso queira trabalhar no excel mais facilmente, só descomentar
+        # caso queira trabalhar no excel mais facilmente, só remover o comentário.
         # encoding     = 'cp1252',
         # csvDelimiter = ';'
     )
@@ -64,7 +64,7 @@ class BatchOpenBanking():
 
     def todos_dados(self):
         """
-        Realiza o download de todos os dados publicos disponíveis dos participantes
+        Realiza o download de todos os dados públicos disponíveis dos participantes
         registrados no diretório do Open Banking Brasil, salvando os dados em arquivos
         na pasta `dataDir` informada na inicialização do `BatchOpenBanking`.
 
@@ -444,7 +444,7 @@ class BatchOpenBanking():
                             file.write(self.csvDelimiter.join(row) + '\n')
                 except:
                     if self.ignoraErros:
-                        print('Participanete ignorado devido a erro no processamento de serviços de um produto.')
+                        print('Participante ignorado devido a erro no processamento de serviços de um produto.')
                         continue
 
                     raise BatchException("Um erro ocorreu durante o processamento de um participante.")
@@ -560,7 +560,7 @@ class BatchOpenBanking():
                             file.write(self.csvDelimiter.join(row) + '\n')
                 except:
                     if self.ignoraErros:
-                        print('Participanete ignorado devido a erro no processamento dos pacotes de serviço de um produto.')
+                        print('Participante ignorado devido a erro no processamento dos pacotes de serviço de um produto.')
                         continue
 
                     raise BatchException("Um erro ocorreu durante o processamento dos pacotes de serviço de um participante.")

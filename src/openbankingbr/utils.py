@@ -11,6 +11,10 @@ from requests.exceptions import (
     Timeout
 )
 
+# Desabilita o warning
+# InsecureRequestWarning: Unverified HTTPS request is being made to host
+requests.packages.urllib3.disable_warnings()
+
 from hashlib import md5
 from datetime import date, datetime
 
@@ -22,7 +26,7 @@ from .errors import (
 
 def get(d: dict, key: str, required: bool = False, valueType: type = None):
     """
-    Obtem dados de um objeto JSON usando a chave especificada.
+    Obtém dados de um objeto JSON usando a chave especificada.
 
     Caso especificado `valueType` será realizado o cast garantindo que o valor está
     no formato esperado. Caso o cast de algum erro e o `required` for `True`, será 
@@ -127,9 +131,13 @@ def fetchUrl(url: str, cacheDir: str = None) -> dict:
                 os.remove(cacheEntry)
             
     try:
-        res = requests.get(url, headers = {
-            'User-Agent': f'OpenBankingBR/{__version__}; (+https://github.com/knuppe/openbankingbr)'
-        })
+        res = requests.get(
+            url, 
+            headers = {
+                'User-Agent': f'OpenBankingBR/{__version__}; (+https://github.com/knuppe/openbankingbr)'
+            },
+            verify=False  # Lógico que como estamos no Brasil, financeiras estão cagando para ter um certificado válido nos endpoints... 
+        )
 
         if not res.ok:
            return None

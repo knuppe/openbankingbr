@@ -85,7 +85,7 @@ class Participante(DataObject):
     @property
     def identificador(self) -> str:
         """
-        Retorna o identificador unico do participante.
+        Retorna o identificador único do participante.
         """
         return get(self.dados, 'OrganisationId', valueType=str, required=True)
 
@@ -346,7 +346,7 @@ class Agencia(DataObject):
         """
         Retorna o telefone da agência.
 
-        Note que este campo é construido com regras priorizando um telefone fixo depois telefone móvel.
+        Note que este campo é construído com regras priorizando um telefone fixo depois telefone móvel.
         """
         phones = get(self.dados, 'phones', valueType=list, required=False)
         if phones is None:
@@ -405,14 +405,14 @@ class Servico(DataObject):
     @property
     def nome(self) -> str:
         """
-        Obtem o nome do serviço.
+        Obtém o nome do serviço.
         """
         return get(self.dados, 'name', valueType=str, required=True)
 
     @property
     def codigo(self) -> str:
         """
-        Obtem o codigo do serviço.
+        Obtém o código do serviço.
         """
         return get(self.dados, 'code', valueType=str, required=False)
 
@@ -677,7 +677,7 @@ class Produto(DataObject):
     @property
     def jurosSeq(self) -> int:
         """
-        Retorna um campo sequencial que identica qual o valor sequencial de juros 
+        Retorna um campo sequencial que identifica qual o valor sequencial de juros 
         é os 
         """
         seq = get(self.dados, 'interestSequence', valueType=int, required=False)
@@ -732,7 +732,7 @@ class Produto(DataObject):
 
     @property
     def participante(self) -> Participante:
-        """Retorna o participanete que oferece este produto."""
+        """Retorna o participante que oferece este produto."""
         return self._participante
 
     @property
